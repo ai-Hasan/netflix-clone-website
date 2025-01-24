@@ -3,6 +3,7 @@ import "./LoginPage.css";
 import logo from "../../assets/logo.png";
 import { login, signup } from "../../firebase.js";
 import spinner from "../../assets/netflix_spinner.gif";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const LoginPage = () => {
   const [signState, setSignState] = useState("Sign In");
@@ -11,7 +12,7 @@ const LoginPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate(); // Properly call the hook here
   const [loading, setLoading] = useState(false);
 
   // fucntion for user authentication
@@ -32,7 +33,15 @@ const LoginPage = () => {
     </div>
   ) : (
     <div className="login">
-      <img src={logo} className="login-logo" alt="logo" />
+      <img
+        onClick={() => {
+          navigate("/");
+        }}
+        src={logo}
+        className="login-logo"
+        alt="logo"
+        style={{ cursor: "pointer" }}
+      />
       <div className="login-form">
         <h1>{signState}</h1>
         <form>
